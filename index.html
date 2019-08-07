@@ -1,0 +1,39 @@
+<html lang="en">
+<header>
+    <title>Web components tutor</title>
+</header>    
+
+<body>
+    <template id="myWebCompTemplate">
+        <div>Hello!</div>
+    </template>
+
+    <!--
+        name should include the "-" symbol 
+        use id to get component 
+    -->
+    <my-webcomp id="myWebComp"></my-webcomp>
+
+    <script type="module">
+        class MyWebComp extends HTMLElement {
+            connectedCallback() {
+                // this.insertAdjacentHTML('beforeEnd', `<div>Hellow!</div>`);
+
+                // const tmpEl = document.querySelector('#myWebCompTemplate');
+                const html = document.importNode(myWebCompTemplate.content, true);
+                this.appendChild(html);
+            }
+            showMessage(event) {
+                alert('Red alert!');
+                console.log(event);
+            }
+        }
+        customElements.define('my-webcomp', MyWebComp);
+    </script>
+
+    <script type="module">
+        myWebComp.showMessage(); // because this component has id ( id="myWebComp" )
+    </script>
+</body>
+
+</html>
