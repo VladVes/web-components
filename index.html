@@ -12,7 +12,7 @@
         name should include the "-" symbol 
         use id to get component 
     -->
-    <my-webcomp id="myWebComp"></my-webcomp>
+    <my-webcomp id="myWebComp" onClick="this.showMessage(event)"></my-webcomp>
 
     <script type="module">
         class MyWebComp extends HTMLElement {
@@ -32,7 +32,8 @@
     </script>
 
     <script type="module">
-        myWebComp.showMessage(); // because this component has id ( id="myWebComp" )
+        // myWebComp.showMessage(); // because this component has id ( id="myWebComp" )
+        
     </script>
 </body>
 
