@@ -4,31 +4,24 @@
 </header>    
 
 <body>
-    <template id="myWebCompTemplate">
-        <div>Hello!</div>
+    
+    <template id="myWebCompTemplate"> <!-- id назван в нотации camelCase т.к. все айдишники элементов прокидываются в глобальное пространство имен -->
+        <div id='helloLabel'>Hello</div>
     </template>
 
     <!--
-        name should include the "-" symbol 
-        use id to get component 
+        The name of web-component should include the "-" symbol 
+        Use id to get component 
     -->
-    <my-webcomp id="myWebComp" onClick="this.showMessage(event)"></my-webcomp>
+    <my-webcomp id="myWebComp" onClick="this.showMessage(event)" greet-name="John"></my-webcomp>
+
+    <my-webcomp id="myWebComp2" onClick="this.showMessage(event)" greet-name="Josh"></my-webcomp>
 
     <script type="module">
-        class MyWebComp extends HTMLElement {
-            connectedCallback() {
-                // this.insertAdjacentHTML('beforeEnd', `<div>Hellow!</div>`);
-
-                // const tmpEl = document.querySelector('#myWebCompTemplate');
-                const html = document.importNode(myWebCompTemplate.content, true);
-                this.appendChild(html);
-            }
-            showMessage(event) {
-                alert('Red alert!');
-                console.log(event);
-            }
-        }
+        import { MyWebComp } from './my-webcomponent.js'
+        
         customElements.define('my-webcomp', MyWebComp);
+        myWebComp.shadowRoot.getElementById('helloLabel');
     </script>
 
     <script type="module">
