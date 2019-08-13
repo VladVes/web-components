@@ -75,6 +75,9 @@ class Button extends HTMLElement {
       // do something 
       // alert('Wow man you have just clicked the button!');
     });
+
+    // when using the button in another context, for instance a dropdown component, you may want to remove this padding from the container. 
+    this.$container = this._shadowRoot.querySelector('.container');
   }
 
   // to reflect the attribute to a property 
@@ -109,6 +112,22 @@ class Button extends HTMLElement {
     // this.label is always returns current attribute value because we have getter method "get label"
     this.$button.innerHTML = this.label;
   }
+
+  
+  // lifecycle callbacks 
+  // The connectedCallback runs once the Web Component got appended to the DOM.
+  connectedCallback() {
+    // Here we are removing paddings if this component is used in Dropdown
+    if (this.hasAttribute('as-atom')) {
+      this.$container.style.padding = '0px';
+      // Now our button can be used without padding in our dropdown element the following way: <my-button as-atom></my-button>
+    }
+  }
+
+  // There exists an equivalent lifecycle callback for when the component gets removed called
+  disconnectedCallback() {}
+
+  // And another lifecycle callbacks https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements#Using_the_lifecycle_callbacks
 
 }
 
