@@ -45,17 +45,36 @@ class Button extends HTMLElement {
     this.$button = this._shadowRoot.querySelector('button');
   }
 
+  // to reflect the attribute to a property 
+  get label() {
+    return this.getAttribute('label');
+  }
+
+  // to reflect the property to an attribute - to set iformation as property like this:
+  // <my-button></my-button>
+  // 
+  // <script>
+  //   const element = document.querySelector('my-button');
+  //   element.label = 'Click Me';
+  // </script>
+  // we need setter method to be defined:
+  set label(value) {
+    this.setAttribute('label', value);
+  }
+
   static get observedAttributes() {
     return ['label'];
   }
 
   attributeChangedCallback(name, oldVal, newVal) {
-    this[name] = newVal;
+    // this[name] = newVal;
 
+    // if we have get label() getter method we don't need to use "this[name] = newVal;" antmore for label attribute al least
     this.render();
   }
 
   render() {
+    // this.label is always returns current attribute value because we have getter method "get label"
     this.$button.innerHTML = this.label;
   }
 
