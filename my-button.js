@@ -43,6 +43,38 @@ class Button extends HTMLElement {
     this._shadowRoot.appendChild(template.content.cloneNode(true));
 
     this.$button = this._shadowRoot.querySelector('button');
+
+    // What’s missing is a callback function given from the outside that can be called within this listener.
+    // we could pass the function as attribute. However, since we have learned that passing non primitives to HTML elements is cumbersome, we would like to avoid this case
+    // so we could pass the function as property like this:
+    // <my-button label="Click Me"></my-button>
+
+    // <script>
+    //   document.querySelector('my-button').onClick = value =>
+    //     console.log(value);
+    // </script>
+    this.$button.addEventListener('click', () => {
+      // if we have defined property onClick document.querySelector('my-button').onClick = (value) => {};
+      // we can call it here:
+      // this.onClick('Wow man you have just clicked the button!\nHello from within the Custom Element!');
+
+      // Now, even though this works as expected, I would rather use the built-in event system provided by the DOM API.
+      // Therefore, let’s register an event listener from the outside instead without assigning the function as property to the element:
+      // <script>
+      //   document
+      //     .querySelector('my-button')
+      //     .addEventListener('click', value => console.log(value));
+      // </script>
+
+      // if you would later on use your Web Component in a different environment (e.g. React),
+      // you may want to offer custom events (e.g. onClick) as API for your component as well
+      this.dispatchEvent(
+        new CustomEvent('onClick', { detail: 'Wow man you have just clicked the button!\nHello from within the Custom Element!' })
+      );
+
+      // do something 
+      // alert('Wow man you have just clicked the button!');
+    });
   }
 
   // to reflect the attribute to a property 

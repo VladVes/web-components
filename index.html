@@ -32,6 +32,10 @@
 
     <script type="module">
         import './my-button.js';
+        document
+            .querySelector('my-button')
+            // we can listen to this new custom event instead:
+            .addEventListener('onClick', value => console.log(value)); 
     </script>
 </body>
 
