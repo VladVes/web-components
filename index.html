@@ -17,6 +17,8 @@
 
     <my-webcomp id="myWebComp2" onClick="this.showMessage(event)" greet-name="Josh"></my-webcomp>
 
+    <my-button label="Click Me"></my-button>
+
     <script type="module">
         import { MyWebComp } from './my-webcomponent.js'
         
@@ -26,7 +28,10 @@
 
     <script type="module">
         // myWebComp.showMessage(); // because this component has id ( id="myWebComp" )
-        
+    </script>
+
+    <script type="module">
+        import './my-button.js';
     </script>
 </body>
 
