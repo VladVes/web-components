@@ -10,6 +10,11 @@ template.innerHTML = `
       padding: 3px 8px 8px;
     }
 
+    .dropdown.open .dropdown-list {
+      display: flex;
+      flex-direction: column;
+    }
+
     .label {
       display: block;
       margin-bottom: 5px;
@@ -46,6 +51,11 @@ template.innerHTML = `
       height: 40px;
       cursor: pointer;
     }
+
+    .dropdown-list li.selected {
+      font-weight: 600;
+    }
+
   </style>
 
   <div class="dropdown">
@@ -66,13 +76,26 @@ class Dropdown extends HTMLElement {
     this._sR = this.attachShadow({ mode: 'open' });
     this._sR.appendChild(template.content.cloneNode(true));
 
+    this.open = false;
+
     this.$label = this._sR.querySelector('.label');
     this.$button = this._sR.querySelector('my-button');
+    this.$dropDown = this._sR.querySelector('.dropdown');
     this.$dropDownList = this._sR.querySelector('.dropdown-list');
+
+    this.$button.addEventListener('onClick', this.toggleOpen.bind(this));
   }
 
   static get observedAttributes() {
     return ['label', 'option', 'options'];
+  }
+
+  toggleOpen(event) {
+    this.open = !this.open;
+
+    this.open
+      ? this.$dropDown.classList.add('open')
+      : this.$dropDown.classList.remove('open');
   }
 
   get label() {
@@ -109,13 +132,30 @@ class Dropdown extends HTMLElement {
 
   render() {
     this.$label.innerHTML = this.label;
-    this.$button.setAttribute('label', this.buttonLabel);
+    
+    if (this.options) {
+      this.$button.setAttribute('label', this.options[this.option].label);
+    }
+
     this.$dropDownList.innerHTML = '';
 
     Object.keys(this.options || {}).forEach(key => {
       let option = this.options[key];
       let $option = document.createElement('li');
       $option.innerHTML = option.label;
+      if (this.option && this.option === key) {
+        $option.classList.add('selected');
+      }
+      $option.addEventListener('click', () => {
+        this.option = key;
+        this.toggleOpen();
+
+        this.dispatchEvent(
+          new CustomEvent('onChange', { detail: key })
+        );
+
+        this.render();
+      });
 
       this.$dropDownList.appendChild($option);
     });
