@@ -1,2 +1,2 @@
 # web-components
-web-components sandbox
+Web-components, LitElement sandbox
