@@ -67,7 +67,8 @@ class Dropdown extends HTMLElement {
     this._sR.appendChild(template.content.cloneNode(true));
 
     this.$label = this._sR.querySelector('.label');
-    
+    this.$button = this._sR.querySelector('my-button');
+    this.$dropDownList = this._sR.querySelector('.dropdown-list');
   }
 
   static get observedAttributes() {
@@ -76,6 +77,10 @@ class Dropdown extends HTMLElement {
 
   get label() {
     return this.getAttribute('label');
+  }
+
+  get buttonLabel() {
+    return this.getAttribute('buttonLabel');
   }
 
   set label(value) {
@@ -103,6 +108,17 @@ class Dropdown extends HTMLElement {
   }
 
   render() {
+    this.$label.innerHTML = this.label;
+    this.$button.setAttribute('label', this.buttonLabel);
+    this.$dropDownList.innerHTML = '';
+
+    Object.keys(this.options || {}).forEach(key => {
+      let option = this.options[key];
+      let $option = document.createElement('li');
+      $option.innerHTML = option.label;
+
+      this.$dropDownList.appendChild($option);
+    });
 
   }
 }

@@ -19,7 +19,12 @@
 
     <my-button label="Click Me"></my-button>
 
-    <my-dropdown></my-dropdown>
+    <my-dropdown
+        label="Dropdown"
+        buttonLabel="Select"
+        option="option2"
+    >
+    </my-dropdown>
 
     <script type="module">
         import { MyWebComp } from './my-webcomponent.js'
@@ -40,6 +45,14 @@
             .querySelector('my-button')
             // we can listen to this new custom event instead:
             .addEventListener('onClick', value => console.log(value)); 
+
+        const myDropdown = document.querySelector('my-dropdown');
+        myDropdown.options = {
+            option1: { label: 'Alpha' },
+            option2: { label: 'Oscar' },
+        };
+
+
     </script>
 </body>
 
