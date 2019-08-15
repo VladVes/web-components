@@ -35,7 +35,7 @@
     <my-litcomp></my-litcomp>
 
     <script type="module">
-        import { MyWebComp } from './my-webcomponent.js'
+        import { MyWebComp } from './Components/my-webcomponent.js'
         
         customElements.define('my-webcomp', MyWebComp);
         myWebComp.shadowRoot.getElementById('helloLabel');
@@ -46,8 +46,8 @@
     </script>
 
     <script type="module">
-        import './my-button.js';
-        import './my-dropdown.js';
+        import './Components/my-button.js';
+        import './Components/my-dropdown.js';
 
         import './LitElemComp/build/index.js';
 
