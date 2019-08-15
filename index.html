@@ -4,6 +4,12 @@
 </header>    
 
 <body>
+
+    <!-- web-component example from Polymer https://github.com/PolymerElements -->
+    <script src="https://unpkg.com/@polymer/paper-checkbox@next/paper-checkbox.js?module" type="module" async></script>
+    <paper-checkbox>Web Components from Polymer!</paper-checkbox>
+
+    <div style="height: 30px;"></div>
     
     <template id="myWebCompTemplate"> <!-- id назван в нотации camelCase т.к. все айдишники элементов прокидываются в глобальное пространство имен -->
         <div id='helloLabel'>Hello</div>
@@ -26,6 +32,8 @@
     >
     </my-dropdown>
 
+    <my-litcomp></my-litcomp>
+
     <script type="module">
         import { MyWebComp } from './my-webcomponent.js'
         
@@ -41,6 +49,8 @@
         import './my-button.js';
         import './my-dropdown.js';
 
+        import './LitElemComp/build/index.js';
+
         document
             .querySelector('my-button')
             // we can listen to this new custom event instead:
@@ -55,6 +65,7 @@
         myDropdown.addEventListener('onChange', event => console.log(event.detail));
 
     </script>
+
 </body>
 
 </html>

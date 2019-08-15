@@ -4,11 +4,20 @@
   "description": "web-components-tutor",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rm -rf ./LitElemComp/build && mkdir ./LitElemComp/build && rollup -c",
+    "start": "http-server"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "lit-element": "^2.2.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "http-server": "^0.11.1",
+    "rollup": "^1.19.4",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-node-resolve": "^5.2.0"
   }
 }
