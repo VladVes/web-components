@@ -19,6 +19,8 @@
 
     <my-button label="Click Me"></my-button>
 
+    <my-dropdown></my-dropdown>
+
     <script type="module">
         import { MyWebComp } from './my-webcomponent.js'
         
@@ -32,6 +34,8 @@
 
     <script type="module">
         import './my-button.js';
+        import './my-dropdown.js';
+
         document
             .querySelector('my-button')
             // we can listen to this new custom event instead:

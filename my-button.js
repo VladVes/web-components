@@ -114,9 +114,10 @@ class Button extends HTMLElement {
   }
 
   
-  // lifecycle callbacks 
+  // Lifecycle callbacks 
   // The connectedCallback runs once the Web Component got appended to the DOM.
   connectedCallback() {
+    // when using the button in another context, for instance a dropdown component, you may want to remove this padding from the container. 
     // Here we are removing paddings if this component is used in Dropdown
     if (this.hasAttribute('as-atom')) {
       this.$container.style.padding = '0px';
