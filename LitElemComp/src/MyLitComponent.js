@@ -1,9 +1,11 @@
-import { LitElement, html } from 'lit-element';
+import { LitElement, html, property } from 'lit-element';
 
 export default class extends LitElement {
-  
-  render() {
-    return html`<p>!Lit-element ComponentZZZZ</p>`;
 
+  @property({ type: String }) 
+  myProp = 123;
+  render() {
+    
+    return html`<p>222111!Lit-element ComponentZZZZ</p>`;
   }
 }

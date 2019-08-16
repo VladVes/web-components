@@ -8,6 +8,23 @@ module.exports = {
     filename: 'boundle.js',
     path: path.resolve(__dirname, 'LitElemComp/dist')
   },
+  module: {
+    rules: [
+      {
+        test: /\.js/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            plugins: [
+              '@babel/plugin-proposal-class-properties',
+              ['@babel/proposal-decorators', { decoratorsBeforeExport: true } ],
+            ]
+          }
+        }
+      }
+    ]
+  },
   devServer: {
     contentBase: path.join(__dirname, '/'),
     publicPath: '/LitElemComp/dist',
